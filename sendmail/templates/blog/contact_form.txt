@@ -1,0 +1,4 @@
+Thank you for subscribing!
+
+Email:
+{{ contact_email }}

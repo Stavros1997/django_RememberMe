@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     #own
     'products',
     'sendmail',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -132,6 +133,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'fantazy.net@gmail.com'
-EMAIL_HOST_PASSWORD = 'JerryStavros1617'
+EMAIL_HOST_USER = 'stavros.pgs@gmail.com'
+EMAIL_HOST_PASSWORD = 'Stavros88028802'
 

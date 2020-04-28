@@ -5,27 +5,23 @@ from .form import *
 from django.core.mail import EmailMessage
 from django.template.loader import get_template
 from .models import Email
+from django.contrib import messages
 
 
 # Create your views here.
 
-def index(request):
-    subject = 'Thank you for registering to our site'
-    message = ' it  means a world to us '
-    email_from = settings.EMAIL_HOST_USER
-    recipient_list = ['stavros.pgs@gmail.com',]
-    send_mail( subject, message, email_from, recipient_list )
-    return render(request,'home.html')
+
 
 # Contact form view
 
 def Contact(request):
     Contact_Form = ContactForm
+    form=Contact_Form(request.POST or None)
     if request.method == 'POST':
         form = Contact_Form(data=request.POST)
 
         if form.is_valid():
-            
+            messages.success(request, 'Thank you for subscribing')
 
 
             contact_email = request.POST.get('contact_email')
@@ -45,12 +41,15 @@ def Contact(request):
             email = EmailMessage(
                 "RememberMe",
                 content,
-                "Creative web" + '',
+                "RememberMe" + '',
                 [contact_email],
                 headers = { 'Reply To': contact_email }
             )
 
             email.send()
+    context={
+        'form':form
 
+    }
             #return redirect('blog:success')
-    return render(request, 'blog/contact.html',{'form':Contact_Form})
+    return render(request, 'blog/contact.html',context)

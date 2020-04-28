@@ -137,7 +137,7 @@
         </section>
         <!-- Contact Section-->
         <section class="page-section" id="contact">
-            <div class="container">
+            <div class="container" id="results">
                 <!-- Contact Section Heading-->
                 <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Subscribe to our Newsletter</h2>
                 <!-- Icon Divider-->
@@ -147,15 +147,16 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Contact Section Form-->
-                <div class="row">
+                <div class="row" >
                     <div class="col-lg-8 mx-auto">
                         <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
-                        <form id="contactForm" name="sentMessage" novalidate="novalidate" method="post">
+                        <form id="contactForm"action="#results"  method="post">
                             {%csrf_token%}
 
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
                                     {%load widget_tweaks%}
+                                    <label>Email Address</label>
                                     {%render_field form.contact_email class="form-control" placeholder="Email Adress"%}
                                     
 
@@ -167,6 +168,32 @@
                             <br />
                             <div id="success"></div>
                             <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Subscribe</button></div>
+                            {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+                            {% if messages %}
+                            <div class="alert alert-success" role="alert">
+    {% for message in messages %}
+    
+  
+  <strong> {{ message }} </strong>
+    {% endfor %}
+
+{% endif %}
+</div>
+
+                            
                         </form>
                     </div>
                 </div>
